@@ -31,9 +31,24 @@ public class ShippingService {
         return result;
     }
 
+    public List<Transportable> sortInternationalPackagesByDistance() {
+        List<InternationalPackage> temp = new ArrayList<>();
+        for (Transportable actual : packages) {
+            if (actual instanceof InternationalPackage) {
+                temp.add((InternationalPackage) actual);
+            }
+        }
+        Collections.sort(temp, Comparator.comparing(InternationalPackage::getDistance));
+        List<Transportable> result = new ArrayList<>();
+        for (InternationalPackage actual: temp) {
+            result.add(actual);
+        }
+        return result;
+    }
 
 
     public List<Transportable> getPackages() {
         return new ArrayList<>(packages);
     }
 }
+
